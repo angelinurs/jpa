@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.api.dto.UserRequest;
-import com.test.api.jpa.service.UsersService;
+import com.test.api.dto.ConsumerRequest;
+import com.test.api.jpa.service.ConsumerService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,21 +19,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/")
-public class UserController {
+public class ConsumerController {
 	
-	private final UsersService usersService;
+	private final ConsumerService consumerService;
 
 	@PostMapping( "/signup" )
 	@Operation( summary = "Sign Up API summary", description = "Sign up")
 	@ApiResponses(value= {
 			@ApiResponse(responseCode = "200", description = "Success",
-					content = {@Content(schema = @Schema(implementation = UserRequest.class))}),
+					content = {@Content(schema = @Schema(implementation = ConsumerRequest.class))}),
 			@ApiResponse(responseCode = "404", description = "Not Found"),
 	})
-	public String signUp(@RequestBody @Valid UserRequest userRequest ) {
+	public String signUp(@RequestBody @Valid ConsumerRequest consumerRequest ) {
 		
-		usersService.saveUser(userRequest);
+		consumerService.saveUser(consumerRequest);
 		
-		return userRequest.toString();
+		return consumerRequest.toString();
 	}
 }

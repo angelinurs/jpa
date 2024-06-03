@@ -2,6 +2,7 @@ package com.test.api.jpa.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -26,13 +27,13 @@ import lombok.ToString;
 @Entity
 @ToString
 @NoArgsConstructor
-@Table(name = "user")
+@Table(name = "consumer")
 //@DynamicUpdate
 //@DynamicInsert
-public class User {
+public class Consumer {
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;	
 	
@@ -45,7 +46,8 @@ public class User {
 	@Column(name = "PHONE",unique = true , nullable = false)
 	private String phone;
 	
-	@Column(name = "CREATION_DATE", nullable = false)
+	@CreationTimestamp
+	@Column(name = "CREATION_DATE", updatable = false)
 	private LocalDateTime creation_date;
 	
 	@Column(name = "BIRIH", nullable = false)
@@ -54,6 +56,9 @@ public class User {
 	@Column(name = "ADDR", nullable = false)
 	private String addr;
 	
+	@Column(name = "ZIPCODE", nullable = false)
+	private String zipcode;
+	
 	@Column(name = "ACTIVATION", nullable = false)
 	private String activation;
 	
@@ -61,8 +66,8 @@ public class User {
 	private Role role;
 
 	@Builder
-	public User(Long id, String user_id, String name, String phone, LocalDateTime creation_date, String birth,
-			String addr, String activation, Role role) {
+	public Consumer(Long id, String user_id, String name, String phone, LocalDateTime creation_date, String birth,
+			String addr, String zipcode, String activation, Role role) {
 		this.id = id;
 		this.user_id = user_id;
 		this.name = name;
@@ -70,9 +75,8 @@ public class User {
 		this.creation_date = creation_date;
 		this.birth = birth;
 		this.addr = addr;
+		this.zipcode = zipcode;
 		this.activation = activation;
 		this.role = role;
-	}
-
-	
+	}	
 }

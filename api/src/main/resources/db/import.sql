@@ -1,4 +1,5 @@
-
+-- 도서 산간 지역 dummy data
+-- ref: https://imweb.me/faq?mode=view&category=29&category2=40&idx=71671
 insert into `doso` (`city` , `category`, `start_zip`, `end_zip`) 
 values 
 ('제주도', '제주도', '63002', '63644'),
@@ -37,3 +38,15 @@ values
 ('전남 여수시', '섬지역1', '59650', '59650'),
 ('전남 여수시', '섬지역2', '59766', '59766'),
 ('전남 여수시', '섬지역3', '59781', '59790');
+
+-- 가입자 dummy data
+insert into CONSUMER (`USER_ID`, `NAME`, `PHONE`, `BIRIH`, `ADDR`, `ZIPCODE`, `CREATION_DATE`, `ACTIVATION`, `ROLE`)  
+values 
+('jumong', '고주몽', '010-9876-9765', '19850710', '제주도 제주시 서광로 3길 41번지', '63175', '2024-05-27 10:43:25.60003', 'Y', 'User'),
+('cuti7', '김기업', '010-2536-6574', '19901021', '서울 강남구 도산대로17길 10 B1 새들러하우스', '06037', '2024-05-27 10:43:25.60003', 'Y', 'User');
+
+-- 상품 dummy data
+insert into PRODUCT (`CODE`, `CATEGORY`, `NAME`, `IMG_URL`, `PRICE`, `AMOUNT`, `DESC`) 
+values
+('w-p-122431', '겨울 외투', '멋있는 구스다운 패딩', 's3://product-img/상품사진-2.jpeg', '157000.0', '1', '신상 구스다운 패딩'),
+('s-s-031530', '양말', '튼튼한 발목 양말', 's3://product-img/상품사진-3.jpeg', '1000.0', '20', '행사할인가격');

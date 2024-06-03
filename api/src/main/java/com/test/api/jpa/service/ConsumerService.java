@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.test.api.dto.UserRequest;
+import com.test.api.dto.ConsumerRequest;
 import com.test.api.jpa.constant.Role;
-import com.test.api.jpa.entities.User;
-import com.test.api.jpa.repository.UserRepository;
+import com.test.api.jpa.entities.Consumer;
+import com.test.api.jpa.repository.ConsumerRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UsersService {
+public class ConsumerService {
 	
-	private final UserRepository userRepository;
+	private final ConsumerRepository consumerRepository;
 	
 //	회원 가입 정보 중복 확인
-	private void validateDuplicateUser(User user) {
+	private void validateDuplicateUser(Consumer user) {
 		
-		User findUser = userRepository.findByPhone(user.getPhone());
+		Consumer findUser = consumerRepository.findByPhone(user.getPhone());
 		
 		
 		if(findUser != null) {
@@ -34,13 +34,13 @@ public class UsersService {
 	}
 	
 //	가입 정보 저장 
-	public User saveUser(UserRequest userFromDto) {
-		User user = User.builder().user_id(userFromDto.getUser_id())
+	public Consumer saveUser(ConsumerRequest userFromDto) {
+		Consumer user = Consumer.builder().user_id(userFromDto.getUser_id())
 								  .name(userFromDto.getName())
 								  .birth(userFromDto.getBirth())
-								  .phone(userFromDto.getAddr())
-								  .addr(userFromDto.getPhone())
-								  .creation_date(LocalDateTime.now())
+								  .phone(userFromDto.getPhone())
+								  .addr(userFromDto.getAddr())
+								  .zipcode(userFromDto.getZipcode())
 								  .activation("Y")
 								  .role(Role.User)
 								  .build();
@@ -48,7 +48,7 @@ public class UsersService {
 		log.info("user : {}", user.toString());
 								  
 		validateDuplicateUser(user);
-		return userRepository.save(user);
+		return consumerRepository.save(user);
 	}
 	
 }
