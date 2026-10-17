@@ -3,7 +3,7 @@ spring:
     url: jdbc:h2:mem:test;NON_KEYWORDS=USER,ORDER,DOSO
     driverClassName: org.h2.Driver
     username: naru
-    password: naru0914
+    password: ${DB_PASSWORD:changeme}
     
   h2:
     console:
